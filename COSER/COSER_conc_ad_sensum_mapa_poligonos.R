@@ -79,7 +79,7 @@ ggplot() +
         axis.text = element_blank(),
         axis.ticks = element_blank(),
         plot.title = element_markdown()) +
-  scale_fill_gradient(low = "lightgrey", high = "tomato")
+  scale_fill_gradient(low = "gray87", high = "gray20")
 
 ggsave("Conc_ad_sensum_COSER_poligonos_map.png",  scale = 1.5) #saves the last plot
 

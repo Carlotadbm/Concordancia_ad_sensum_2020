@@ -7,7 +7,8 @@ library(extrafont)
 library(grDevices)
 library(ggtext)
 library(ggExtra)
-library(wesanderson)
+#library(wesanderson)
+library(ggpattern)
 library(ggrepel)
 library(lme4)
 library(broom.mixed)
@@ -109,12 +110,14 @@ coser_todos$persona <- factor(coser_todos$persona, levels = order_person)
 
 coser_todos %>% 
   ggplot(aes(x = tipo, y = prop, group = persona))  + 
-  geom_col(aes(fill=persona), position = "fill") +
+  geom_col_pattern(aes(pattern=persona, pattern_angle = persona, pattern_spacing = persona),
+                   fill = 'white', colour = 'grey', pattern_density = 0.35,
+                   pattern_fill = 'grey', pattern_colour  = 'grey', position = "fill") +
   labs(title="Concordancia verbal por lexema del sujeto", x="Verbo", 
        y="Frecuencia de la concordancia", fill="Concordancia") +
-  geom_text_repel(aes(label = n), position = position_fill(vjust = .5), segment.alpha = .2, direction = "y") + 
+  geom_text_repel(aes(label = n), position = position_fill(vjust = .5), segment.alpha = 1, direction = "y", segment.colour = "black") + 
   theme_classic(base_family = "Times New Roman", base_size = 16) +
-  scale_fill_manual(values=wes_palette(n=4, name="Moonrise3")) + 
+  scale_pattern_spacing_discrete(range = c(0.01, 0.05)) +
   coord_flip() +
   facet_wrap(~ busqueda, scales = "free_x")
 
@@ -167,15 +170,17 @@ la_gente_plot$persona <- factor(la_gente_plot$persona, levels = order_person2)
 
 la_gente_plot %>% 
   ggplot(aes(x = tipo, y = prop, group = persona))  + 
-  geom_col(aes(fill=persona), position = "fill") +
+  geom_col_pattern(aes(pattern=persona, pattern_angle = persona, pattern_spacing = persona),
+                   fill = 'white', colour = 'grey', pattern_density = 0.35,
+                   pattern_fill = 'grey', pattern_colour  = 'grey', position = "fill") +
   labs(title="Concordancia de *gente* según el contexto", x="Sujeto", 
        y="Frecuencia de la concordancia", fill="Concordancia") +
-  geom_text_repel(aes(label = n), position = position_fill(vjust = .5), segment.alpha = .2, direction = "y") + 
+  geom_text_repel(aes(label = n), position = position_fill(vjust = .5), segment.alpha = 1, direction = "y", segment.colour = "black") + 
   theme_classic(base_family = "Times New Roman", base_size = 16) +
-  scale_fill_manual(values=wes_palette(n=3, name="Moonrise3")) + 
+  scale_pattern_spacing_discrete(range = c(0.01, 0.05)) +
   coord_flip() +
   theme(plot.title = element_markdown())
-  
+
 ggsave("coser_lagente_contextos.png", width = 12, height = 8)
 
 #Modelo estadístico
