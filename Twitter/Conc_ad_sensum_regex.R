@@ -9,6 +9,7 @@ lagente <- tweets %>%
   mutate(text = str_to_lower(text, locale = "es")) %>% 
   filter(str_detect(text, "\\bla gente\\b")) %>%
   filter(!str_detect(text, "\\b(a|ante|bajo|con|contra|de|desde|en|entre|hacia|hasta|mediante|para|por|seg[úu]n|sin|sobre|tras|versus|vía) (?:toda )?la gente\\b")) 
+#(?:) creates a non-capturing group. It groups things together without creating a backreference.
 
 lafamilia <- tweets %>% 
   select(idtweets, id, text, fecha, place_name, place) %>% 
